@@ -25,10 +25,11 @@
         </div>
         <div class="container">
             <input id="tableFilter" type="text" placeholder="type your name or id..."></input>
+            <span id="search" class="button">Search</span>
             <span class="clear button">Clear</span>
             <span class="noMatches">no matches</span>
-            <div id="hackSpotsTable"></div>
-            Loading...
+            <p>Your schedule will load here once you type in your Student ID number and click Search</p>
+            <div id="hackSpotsTable" class="hidden"></div>
         </div>
     </div><!-- end wrapper -->
 
@@ -79,9 +80,15 @@
             var geoJSON = Sheetsee.createGeoJSON(gData, optionsJSON)
           }
 
-        $(document).on('keyup', '#tableFilter', function() {
+        $(document).on('click', '#search', function() {
             window.location.hash = $(this).val()
             $('.spotRow').first().click()
+            $('#hackSpotsTable').removeClass('hidden');
+        })
+
+        $('.clear').click(function() {
+          console.log('clear')
+          $('#hackSpotsTable').addClass('hidden');
         })
     </script>
 </body>
