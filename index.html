@@ -5,7 +5,6 @@
         <script type="text/javascript" src='js/jquery.js '></script>
         <script type="text/javascript" src='js/tabletop1.3.4.js'></script>
         <script type="text/javascript" src='js/sheetsee.js'></script>
-        <script type="text/javascript" src='js/leaflet.markercluster.js'></script>
         <link rel="shortcut icon" href="https://raw.github.com/jlord/hack-spots/master/favico.png"/>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -76,18 +75,40 @@
 
             // create geoJSON with coordinates and other
             // useful bits from the original data
-            var optionsJSON = ["dat", "time", "rowNumber", "familyname", "givennames", "pracgroup", "examroom"]
+            var optionsJSON = ["day", "time", "rowNumber", "familyname", "givennames", "pracgroup", "examroom"]
             var geoJSON = Sheetsee.createGeoJSON(gData, optionsJSON)
           }
 
         $(document).on('click', '#search', function() {
-            window.location.hash = $(this).val()
-            $('.spotRow').first().click()
-            $('#hackSpotsTable').removeClass('hidden');
+            var input = $('#tableFilter').val();
+            console.log(input);
+            if (input.length != 9) {
+              $('#hackSpotsTable').addClass('hidden');
+            } else {
+              // $('.spotRow').first().click()
+              $('.spotRow')
+              $('#hackSpotsTable').removeClass('hidden');
+            }
         })
 
+        document.addEventListener("keydown", KeyCheck);  //or however you are calling your method
+          function KeyCheck(event)
+          {
+             var KeyID = event.keyCode;
+             switch(KeyID)
+             {
+                case 8:
+                $('#hackSpotsTable').addClass('hidden');
+                break;
+                case 46:
+                $('#hackSpotsTable').addClass('hidden');
+                break;
+                default:
+                break;
+             }
+          }
+
         $('.clear').click(function() {
-          console.log('clear')
           $('#hackSpotsTable').addClass('hidden');
         })
     </script>
